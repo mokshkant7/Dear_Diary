@@ -35,7 +35,7 @@ class _EntryListState extends State<EntryList> {
       context: context,
       builder: (context) => AlertDialog(
        // title: Text(entry.title),
-        content: Text("ID ${entry.id}"),
+        content: Text("Entry ${entry.id}"),
         actions: <Widget>[
           FlatButton(
             onPressed: () => Navigator.pushReplacement(
@@ -73,8 +73,6 @@ class _EntryListState extends State<EntryList> {
           builder: (context, entryList) {
             return ListView.separated(
               itemBuilder: (BuildContext context, int index) {
-                print("entryList: $entryList");
-
                 Entry entry = entryList[index];
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
