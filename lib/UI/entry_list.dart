@@ -3,6 +3,7 @@ import 'package:diary_app/events/delete_entry.dart';
 import 'package:diary_app/events/set_entries.dart';
 import 'package:diary_app/UI/entry_form.dart';
 import 'package:diary_app/model/entry.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -76,18 +77,23 @@ class _EntryListState extends State<EntryList> {
 
                 Entry entry = entryList[index];
                 return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(height: 15,),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0,0,MediaQuery.of(context).size.width*0.65,0),
-                      child: Text(new DateTime.now().toString().substring(0,16),style: TextStyle(color: Colors.blueAccent),),
+                      padding: EdgeInsets.fromLTRB(15,0,0,0),
+                      child: Text(new DateFormat("dd-MM-yyyy").format(now),style: TextStyle(color: Colors.blueAccent),),
                     ),
                     SizedBox(height: 15,),
                     ListTile(
                       //  title: Text(entry.title, style: TextStyle(fontSize: 30)),
-                        subtitle: Text(entry.message, style: TextStyle(fontSize: 18)),
+                        subtitle: Text(entry.message, style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                         onTap: () => showEntryDialog(context, entry, index)),
                     SizedBox(height: 15,),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(15,0,0,0),
+                      child: Text(new DateFormat("H:m:s").format(now),style: TextStyle(color: Colors.blueAccent),),
+                    ),
                   ],
                 );
               },
