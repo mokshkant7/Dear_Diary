@@ -1,12 +1,12 @@
 import 'package:diary_app/Db/database_provider.dart';
 import 'package:diary_app/events/delete_entry.dart';
 import 'package:diary_app/events/set_entries.dart';
-import 'package:diary_app/entry_form.dart';
+import 'package:diary_app/UI/entry_form.dart';
 import 'package:diary_app/model/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'bloc/entry_bloc.dart';
+import '../bloc/entry_bloc.dart';
 
 DateTime now = DateTime.now();
 String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);

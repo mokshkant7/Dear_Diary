@@ -1,4 +1,4 @@
-import 'package:diary_app/entry_list.dart';
+import 'package:diary_app/UI/entry_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
