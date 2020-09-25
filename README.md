@@ -26,3 +26,4 @@ https://sqlite.org/index.html
 Ensure that you run 'pub get' command to ensure you have all dependencies/packages.
 
 ### Example
+![MyDiary](https://github.com/mokshkant7/Dear_Diary/blob/master/Assets/MyDiary.gif)
