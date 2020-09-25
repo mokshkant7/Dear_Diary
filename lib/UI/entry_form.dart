@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/animation.dart';
 
-DateTime now = DateTime.now();
 
 class EntryForm extends StatefulWidget {
   final Entry entry;
@@ -74,7 +73,8 @@ class EntryFormState extends State<EntryForm> with SingleTickerProviderStateMixi
   }
 
   Widget getTime(){
-    return Text(DateFormat('yyyy-MM-dd – kk:mm').format(now)??0000-00-00);
+    DateTime now = DateTime.now();
+    return Text(_time=DateFormat('yyyy-MM-dd – kk:mm').format(now)??0000-00-00);
   }
 
   Widget getSize(){
@@ -93,7 +93,7 @@ class EntryFormState extends State<EntryForm> with SingleTickerProviderStateMixi
 
     controller =
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
-    animation = Tween<double>(begin: 12.0, end: 50.0).animate(controller)
+    animation = Tween<double>(begin: 12.0, end: 25.0).animate(controller)
       ..addListener(() {
         setState(() {
           // The state that has changed here is the animation object’s value.
@@ -135,7 +135,7 @@ class EntryFormState extends State<EntryForm> with SingleTickerProviderStateMixi
                     'Submit',
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
-                  onLongPress:(){increaseFontSize();} ,
+                  onLongPress:(){increaseFontSize();},
                   onPressed: () {
                     if (!_formKey.currentState.validate()) {
                       return;
@@ -144,6 +144,7 @@ class EntryFormState extends State<EntryForm> with SingleTickerProviderStateMixi
                     _formKey.currentState.save();
 
                     Entry entry = Entry(
+
                       time: _time,
                       message: _message,
                       size : _size,
