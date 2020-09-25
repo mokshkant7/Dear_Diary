@@ -6,7 +6,7 @@ import 'package:path/path.dart';
 class DatabaseProvider{
   static const String TABLE_ENTRIES = 'entries';
   static const String COLUMN_ID = 'id';
- // static const String TITLE = 'title';
+  static const String TIME = 'time';
   static const String MESSAGE = 'message';
 
   DatabaseProvider._();
@@ -38,7 +38,7 @@ class DatabaseProvider{
         await database.execute(
           "CREATE TABLE $TABLE_ENTRIES ("
               "$COLUMN_ID INTEGER PRIMARY KEY,"
-             // "$TITLE TEXT,"
+              "$TIME TEXT,"
               "$MESSAGE TEXT"
               ")",
         );
@@ -50,7 +50,7 @@ class DatabaseProvider{
     final db = await database;
 
     var entries = await db
-        .query(TABLE_ENTRIES, columns: [COLUMN_ID, MESSAGE]);
+        .query(TABLE_ENTRIES, columns: [COLUMN_ID, TIME, MESSAGE]);
 
     List<Entry> entryList = List<Entry>();
 

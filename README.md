@@ -20,6 +20,9 @@ This is a personal Diary App which has been made using the Flutter SDK and SQLit
 The package to be included for usage of SQLite in Flutter is :
 https://pub.dev/packages/sqflite
 
-To add an option of 'Title' for Enteries a 'Title' field can be added in the database provider and the code which is commented can be uncommented (Remove '//').
+What is SQLite ?
+https://sqlite.org/index.html
+
+Ensure that you run 'pub get' command to ensure you have all dependencies/packages.
 
 ### Example

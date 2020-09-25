@@ -9,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import '../bloc/entry_bloc.dart';
 
-DateTime now = DateTime.now();
-String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+//DateTime now = DateTime.now();
+//String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
 
 class EntryList extends StatefulWidget {
   const EntryList({Key key}) : super(key: key);
@@ -80,7 +80,7 @@ class _EntryListState extends State<EntryList> {
                     SizedBox(height: 15,),
                     Padding(
                       padding: EdgeInsets.fromLTRB(15,0,0,0),
-                      child: Text(new DateFormat("dd-MM-yyyy").format(now),style: TextStyle(color: Colors.blueAccent),),
+                //      child: Text(entry.time,style: TextStyle(color: Colors.blueAccent),),
                     ),
                     SizedBox(height: 15,),
                     ListTile(
@@ -88,10 +88,6 @@ class _EntryListState extends State<EntryList> {
                         subtitle: Text(entry.message, style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                         onTap: () => showEntryDialog(context, entry, index)),
                     SizedBox(height: 15,),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(15,0,0,0),
-                      child: Text(new DateFormat("H:m:s").format(now),style: TextStyle(color: Colors.blueAccent),),
-                    ),
                   ],
                 );
               },
