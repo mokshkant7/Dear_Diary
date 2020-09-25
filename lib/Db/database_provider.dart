@@ -7,6 +7,7 @@ class DatabaseProvider{
   static const String TABLE_ENTRIES = 'entries';
   static const String COLUMN_ID = 'id';
   static const String TIME = 'time';
+  static const String SIZE = 'size';
   static const String MESSAGE = 'message';
 
   DatabaseProvider._();
@@ -39,6 +40,7 @@ class DatabaseProvider{
           "CREATE TABLE $TABLE_ENTRIES ("
               "$COLUMN_ID INTEGER PRIMARY KEY,"
               "$TIME TEXT,"
+              "$SIZE TEXT,"
               "$MESSAGE TEXT"
               ")",
         );
@@ -50,7 +52,7 @@ class DatabaseProvider{
     final db = await database;
 
     var entries = await db
-        .query(TABLE_ENTRIES, columns: [COLUMN_ID, TIME, MESSAGE]);
+        .query(TABLE_ENTRIES, columns: [COLUMN_ID, TIME, SIZE, MESSAGE]);
 
     List<Entry> entryList = List<Entry>();
 

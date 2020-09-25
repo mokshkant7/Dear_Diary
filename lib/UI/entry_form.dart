@@ -4,7 +4,11 @@ import 'package:diary_app/events/add_entry.dart';
 import 'package:diary_app/events/update_entry.dart';
 import 'package:diary_app/model/entry.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/animation.dart';
+
+DateTime now = DateTime.now();
 
 class EntryForm extends StatefulWidget {
   final Entry entry;
@@ -18,9 +22,13 @@ class EntryForm extends StatefulWidget {
   }
 }
 
-class EntryFormState extends State<EntryForm> {
+class EntryFormState extends State<EntryForm> with SingleTickerProviderStateMixin{
 //  String _title;
   String _message;
+  String _time;
+  String _size;
+  Animation<double> animation;
+  AnimationController controller;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -50,7 +58,7 @@ class EntryFormState extends State<EntryForm> {
       decoration: InputDecoration(hintText:'Write Your Story :',hintStyle: TextStyle(fontSize: 16) ),
       maxLength: null,
       maxLines: 11,
-      style: TextStyle(fontSize: _fontSize),
+      style: TextStyle(fontSize: animation.value),
 
       validator: (String value) {
         if (value.isEmpty) {
@@ -65,20 +73,37 @@ class EntryFormState extends State<EntryForm> {
     );
   }
 
-  double _fontSize = 18;
+  Widget getTime(){
+    return Text(DateFormat('yyyy-MM-dd – kk:mm').format(now)??0000-00-00);
+  }
+
+  Widget getSize(){
+    return Text( _size=animation.value.toString()??18);
+  }
 
   void increaseFontSize() {
     setState(() {
-      _fontSize += 1;
+      controller.forward();
     });
   }
 
   @override
   void initState() {
     super.initState();
+
+    controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
+    animation = Tween<double>(begin: 12.0, end: 50.0).animate(controller)
+      ..addListener(() {
+        setState(() {
+          // The state that has changed here is the animation object’s value.
+        });
+      });
+
     if (widget.entry != null) {
-//      _title = widget.entry.title;
+      _time = widget.entry.time;
       _message = widget.entry.message;
+      _size=widget.entry.size;
     }
   }
 
@@ -95,6 +120,8 @@ class EntryFormState extends State<EntryForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
 //              _buildTitle(),
+              getTime(),
+                getSize(),
                 _buildMessage(),
                 SizedBox(height: 16),
                 widget.entry == null
@@ -108,9 +135,8 @@ class EntryFormState extends State<EntryForm> {
                     'Submit',
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
-                  onLongPress:(){for (var i =0;i<5;i++){increaseFontSize();}} ,
+                  onLongPress:(){increaseFontSize();} ,
                   onPressed: () {
-                    increaseFontSize();
                     if (!_formKey.currentState.validate()) {
                       return;
                     }
@@ -118,8 +144,9 @@ class EntryFormState extends State<EntryForm> {
                     _formKey.currentState.save();
 
                     Entry entry = Entry(
-//                    title: _title,
+                      time: _time,
                       message: _message,
+                      size : _size,
                     );
 
                     DatabaseProvider.db.insert(entry).then(
@@ -148,8 +175,9 @@ class EntryFormState extends State<EntryForm> {
                         _formKey.currentState.save();
 
                         Entry entry = Entry(
-//                        title: _title,
+                          time: _time,
                           message: _message,
+                          size : _size,
                         );
 
                         DatabaseProvider.db.update(widget.entry).then(
@@ -178,3 +206,4 @@ class EntryFormState extends State<EntryForm> {
     );
   }
 }
+

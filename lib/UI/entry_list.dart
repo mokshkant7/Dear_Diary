@@ -80,12 +80,12 @@ class _EntryListState extends State<EntryList> {
                     SizedBox(height: 15,),
                     Padding(
                       padding: EdgeInsets.fromLTRB(15,0,0,0),
-                //      child: Text(entry.time,style: TextStyle(color: Colors.blueAccent),),
+                      child: Text(entry.time??"Today",style: TextStyle(color: Colors.blueAccent),),
                     ),
                     SizedBox(height: 15,),
                     ListTile(
                       //  title: Text(entry.title, style: TextStyle(fontSize: 30)),
-                        subtitle: Text(entry.message, style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
+                        subtitle: Text(entry.message, style: TextStyle(fontSize: double.parse(entry.size),fontWeight: FontWeight.bold)),
                         onTap: () => showEntryDialog(context, entry, index)),
                     SizedBox(height: 15,),
                   ],
